@@ -1,0 +1,8 @@
+[package]
+name = "clarke_park_transform_rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+eframe = "0.29.1"
+egui_plot = "0.29.0"
