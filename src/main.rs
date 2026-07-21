@@ -67,7 +67,7 @@ impl Default for MyApp {
             ang_a: 0.0,
             ang_b: -120.0,
             ang_c: 120.0,
-            freq: 60.0,
+            freq: 50.0,
             delta: 0.0,
             ref_dfreq: 0.0,
             harm5: 0.0,
@@ -471,6 +471,32 @@ impl eframe::App for MyApp {
                     }
                 }
             };
+
+            // Color key, pinned above the scrolling rows so every trace, axis
+            // and vector stays identifiable while browsing any plot.
+            let swatch = |ui: &mut egui::Ui, color: Color32, text: &str| {
+                let (rect, _) = ui.allocate_exact_size(egui::vec2(12.0, 12.0), egui::Sense::hover());
+                ui.painter().rect_filled(rect, 2.0, color);
+                ui.label(text);
+            };
+            ui.horizontal_wrapped(|ui| {
+                ui.label("Key:");
+                swatch(ui, COL_A, "A");
+                swatch(ui, COL_B, "B");
+                swatch(ui, COL_C, "C");
+                ui.separator();
+                swatch(ui, COL_ALPHA, "α");
+                swatch(ui, COL_BETA, "β");
+                swatch(ui, COL_ZERO, "0 (zero-seq, dashed)");
+                ui.separator();
+                swatch(ui, COL_D, "d axis");
+                swatch(ui, COL_Q, "q axis");
+                ui.separator();
+                swatch(ui, COL_VEC, "space vector");
+                swatch(ui, Color32::from_gray(140), "locus");
+                swatch(ui, COL_CURSOR, "time cursor (dashed)");
+            });
+            ui.separator();
 
             egui::ScrollArea::vertical().show(ui, |ui| {
                 let time_plot_width = (ui.available_width() - RADIAL_WIDTH - 24.0).max(200.0);
