@@ -7,6 +7,7 @@ pub fn abc_to_alpha_beta_0(a: f64, b: f64, c: f64) -> (f64, f64, f64) {
     (alpha, beta, z)
 }
 
+#[allow(dead_code)]
 pub fn alpha_beta_0_to_abc(alpha: f64, beta: f64, z: f64) -> (f64, f64, f64) {
     let a = alpha + z;
     let b = -alpha / 2.0 + beta * (3.0_f64).sqrt() / 2.0 + z;
